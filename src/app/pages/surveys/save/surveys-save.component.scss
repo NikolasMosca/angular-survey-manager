@@ -1,0 +1,35 @@
+.form-container {
+  padding: 20px;
+
+  .mat-form-field {
+    width: 100%;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+  }
+}
+
+.question-container {
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.options-container {
+  padding: 10px;
+
+  .option-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+}
+
+.floating-buttons-container {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  display: flex;
+  gap: 10px;
+}

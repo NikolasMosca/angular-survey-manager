@@ -1,0 +1,6 @@
+<mat-nav-list>
+    <mat-list-item *ngFor="let item of routes" [routerLink]="item.url" (click)="onClick()" class="parent">
+        <span class="full-width">{{item.title}}</span>
+        <mat-icon mat-list-icon>{{item.icon}}</mat-icon>
+    </mat-list-item>
+</mat-nav-list>
