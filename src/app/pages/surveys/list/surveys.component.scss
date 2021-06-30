@@ -3,3 +3,29 @@
   right: 20px;
   bottom: 20px;
 }
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  .card {
+    width: calc(33% - 10px);
+  }
+}
+
+@media screen and (min-width: 600px) and (max-width: 1200px) {
+  .cards-container {
+    .card {
+      width: calc(50% - 10px);
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .cards-container {
+    .card {
+      width: 100%;
+    }
+  }
+}

@@ -1,29 +1,45 @@
 <div class="form-container">
-    <div class="display-1">Form survey</div>
+    <h3>Form survey {{id}}</h3>
     <mat-form-field>
         <mat-label>Title</mat-label>
         <textarea matInput placeholder="Insert the survey's title" [(ngModel)]="title"></textarea>
     </mat-form-field>
+    <mat-error>
+        {{errors.title}}
+    </mat-error>
 
-    <button mat-raised-button color="secondary" (click)="addQuestion()">Add new question</button>
-
+    <button mat-raised-button color="primary" (click)="addQuestion()">Add new question</button>
 
     <mat-card class="question-container" *ngFor="let question of questions, let qIndex = index">
         <mat-card-content>
         
-            <div><strong class="display-1">Question</strong></div>
+            <h3>Question</h3>
             <mat-form-field>
                 <mat-label>Question</mat-label>
                 <textarea matInput placeholder="Insert the question" [(ngModel)]="question.title"></textarea>
             </mat-form-field>
+            <mat-error *ngIf="errors.questions[qIndex]?.title?.length > 0">
+                {{errors.questions[qIndex].title}}
+            </mat-error>
+
+            <mat-button-toggle-group [(ngModel)]="question.type" aria-label="Correct answer" (click)="onChangeQuestionType(question)">
+                <mat-button-toggle value="single">Single answer</mat-button-toggle>
+                <mat-button-toggle value="multiple">Multiple answer</mat-button-toggle>
+            </mat-button-toggle-group>
           
-            <div><strong class="display-1">Options</strong></div>
+            <h3>Options</h3>
             <div class="options-container">
                 <div class="option-item" *ngFor="let option of question.options, let oIndex = index">
-                    <mat-form-field>
-                        <mat-label>Question</mat-label>
-                        <textarea matInput placeholder="Insert the option" [(ngModel)]="option.title"></textarea>
-                    </mat-form-field>
+                    <div class="full-width">
+                        <mat-form-field>
+                            <mat-label>Question</mat-label>
+                            <textarea matInput placeholder="Insert the option" [(ngModel)]="option.title"></textarea>
+                        </mat-form-field>
+                        <mat-error *ngIf="errors.questions[qIndex]?.options[oIndex]?.title?.length > 0">
+                            {{errors.questions[qIndex].options[oIndex].title}}
+                        </mat-error>
+                    </div>
+
                     <button mat-mini-fab color="{{ getColorOption(question, oIndex) }}" (click)="setCorrectAnswer(question, oIndex)">
                         <mat-icon>{{ getIconOption(question, oIndex) }}</mat-icon>
                     </button>
@@ -35,8 +51,8 @@
 
         </mat-card-content>
         <mat-card-actions>
-            <button mat-button color="secondary" (click)="question.options.push({})">Add new option</button>
-            <button mat-button color="warn" (click)="questions.splice(qIndex, 1)">DELETE</button>
+            <button mat-button color="secondary" (click)="question.options.push({})">ADD NEW OPTION</button>
+            <button mat-button color="warn" (click)="questions.splice(qIndex, 1)">DELETE QUESTION</button>
         </mat-card-actions>
       </mat-card>
 </div>
@@ -45,7 +61,7 @@
     <button mat-fab color="secondary" [routerLink]="route.undo()">
         <mat-icon>undo</mat-icon>
     </button>
-    <button mat-fab color="primary">
+    <button mat-fab color="primary" (click)="onSave()">
         <mat-icon>save_alt</mat-icon>
     </button>
 </div>

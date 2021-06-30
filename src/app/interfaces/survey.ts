@@ -10,7 +10,7 @@ export interface Question {
 }
 
 export interface Survey {
-    id: number,
+    id: string,
     title: string,
     questions: Array<Question>
 }

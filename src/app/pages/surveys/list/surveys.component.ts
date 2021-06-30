@@ -17,7 +17,15 @@ export class SurveysComponent implements OnInit {
   constructor(private surveyService: SurveyService) { }
 
   ngOnInit(): void {
+    this.getSurveys()
+  }
+
+  getSurveys() {
     this.surveys = this.surveyService.getSurveys()
   }
 
+  onDelete(id) {
+    this.surveyService.deleteSurvey(id)
+    this.getSurveys()
+  }
 }
