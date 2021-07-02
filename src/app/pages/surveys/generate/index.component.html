@@ -1,0 +1,31 @@
+<div class="form-container">
+    <h3>Generate survey</h3>
+
+    <mat-button-toggle-group [(ngModel)]="data.type" class="item" aria-label="Correct answer">
+        <mat-button-toggle value="boolean">True/False</mat-button-toggle>
+        <mat-button-toggle value="multiple">Multiple answer</mat-button-toggle>
+    </mat-button-toggle-group>
+
+    <mat-form-field appearance="fill" class="item">
+        <mat-label>Category</mat-label>
+        <mat-select [(ngModel)]="data.category">
+            <mat-option *ngFor="let category of categories" [value]="category.value">
+                {{category.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="item" appearance="fill">
+        <mat-label>N. Questions</mat-label>
+        <input matInput type="number" placeholder="Number of questions" [(ngModel)]="data.amount">
+    </mat-form-field>
+</div>
+
+<div class="floating-buttons-container">
+    <button mat-fab color="secondary" [routerLink]="route.undo()">
+        <mat-icon>undo</mat-icon>
+    </button>
+    <button mat-fab color="primary" (click)="onSave()">
+        <mat-icon>save_alt</mat-icon>
+    </button>
+</div>

@@ -111,7 +111,9 @@ export class SurveysSaveComponent {
       questions: this.questions
     })
 
-    this.snackBar.open('Survey saved!');
+    this.snackBar.open('Survey saved!', 'Undo', {
+      duration: 3000
+    });
     this.router.navigateByUrl(this.route.undo())
   }
 

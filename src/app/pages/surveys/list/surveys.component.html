@@ -13,7 +13,10 @@
 </div>
 
 <div class="floating-buttons-container">
+    <button mat-fab color="secondary" [routerLink]="route.generate()">
+      <mat-icon>calculate</mat-icon>
+    </button>
     <button mat-fab color="primary" [routerLink]="route.create()">
-        <mat-icon>add</mat-icon>
+      <mat-icon>add</mat-icon>
     </button>
 </div>

@@ -1,3 +1,4 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Survey } from 'src/app/interfaces/survey';
 
@@ -6,7 +7,7 @@ import { Survey } from 'src/app/interfaces/survey';
 })
 export class SurveyService {
 
-  constructor() { }
+  constructor(private http:HttpClient) { }
 
   getSurveys(): Array<Survey> {
     try {
@@ -48,5 +49,11 @@ export class SurveyService {
       ret += Math.random().toString(16).substring(2);
     }
     return ret.substring(0,length);
+  }
+
+  async generateQuestions(data) {
+    let params = new HttpParams()
+    for(let key in data) if(data[key]) params = params.set(key, data[key])
+    return await this.http.get("https://opentdb.com/api.php", { params }).toPromise()
   }
 }
